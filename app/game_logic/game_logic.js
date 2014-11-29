@@ -62,7 +62,7 @@
 
 				console.debug('creating game', player_count);
 
-        comms = comms_instance;
+        		comms = comms_instance;
 
 				Game.player_count = player_count;
 				Game.players = {};
@@ -102,19 +102,20 @@
 				return [Game.order.length, Game.player_count];
 			},
 
-      getGameState: function() {
-        console.log(Game);
-      },
+			getGameState: function() {
+				console.log(Game);
+			},
 
-      hasStarted: function hasStarted() {
-        return has_started;
-      },
+			hasStarted: function hasStarted() {
+
+				return has_started;
+			},
 
 			startGame: function startGame(){
 
 				console.debug('Starting game');
 
-        has_started = true;
+				has_started = true;
 
 				Game.stack = shuffle(game_configs.cards);
 				console.debug(Game.stack, game_configs.cards);
@@ -124,7 +125,14 @@
 				var Player = Game.players[next_user_id];
 
 				console.debug('next_user_id', next_user_id);
-				comms.send(next_user_id, {action: 'turn', cards: Player.cards});
+				comms.send(
+					next_user_id,
+					{
+						action: 'turn',
+						cards: Player.cards,
+						top: Game.Host.cards[0]
+					}
+				);
 			},
 
 			playCard: function playCard(user_id, card){
@@ -179,7 +187,7 @@
 				var next_user_id = Game.order[0];
 
 				console.debug('next_user_id', next_user_id);
-				comms.send(next_user_id, {action: 'turn', cards: Player.cards});
+				comms.send(next_user_id, {action: 'turn', cards: Player.cards, top: Game.Host.cards[0]});
 			},
 
 			isCardAllowed: function isCardAllowed(Card){
