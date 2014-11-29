@@ -119,6 +119,12 @@
 				Game.stack = shuffle(game_configs.cards);
 				console.debug(Game.stack, game_configs.cards);
 				deal();
+
+				var next_user_id = Game.order[0];
+				var Player = Game.players[next_user_id];
+
+				console.debug('next_user_id', next_user_id);
+				comms.send(next_user_id, {action: 'turn', cards: Player.cards});
 			},
 
 			playCard: function playCard(user_id, card){
