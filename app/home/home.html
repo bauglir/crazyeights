@@ -1,20 +1,7 @@
 <div ng-controller="Home as homeController">
 	<h1>{{home.name}}</h1>
 
-  <user ng-hide="user.name"></user>
-
-  <div ng-show="user.name && !home.comms.hasPeers(1) && !home.is_hosting">
-    <h2>Hi {{ user.name }}</h2>
-
-    <form no-validate ng-submit="home.comms.join(game_id)">
-        <input ng-model="game_id" placeholder="Game ID">
-        <input type="submit" value="Join">
-    </form>
-
-    <form no-validate ng-submit="home.hostGame(user)">
-        <input type="submit" value="Host a game">
-    </form>
-  </div>
+  <user ng-hide="home.comms.hasPeers(1) || home.is_hosting"></user>
 
   <div ng-show="home.is_hosting">
       <div ng-hide="home.game.hasStarted()">

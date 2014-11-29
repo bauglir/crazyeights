@@ -6,6 +6,7 @@ angular.module('app.user',[])
         controllerAs: 'user',
         controller: function() {
             var user = this;
+            user.role_choice = 'user';
 
             user.setName = function setName(name) {
                 user.name = name;
