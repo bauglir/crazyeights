@@ -137,6 +137,46 @@ h1 {
 	transform: rotate(45deg);
 }
 
+.cards li:nth-child(8){
+	left: 350px;
+	transform: rotate(55deg);
+}
+
+.cards li:nth-child(9){
+	left: 400px;
+	transform: rotate(65deg);
+}
+
+.cards li:nth-child(10){
+	left: 450px;
+	transform: rotate(75deg);
+}
+
+.cards li:nth-child(11){
+	left: 500px;
+	transform: rotate(85deg);
+}
+
+.cards li:nth-child(12){
+	left: 550px;
+	transform: rotate(95deg);
+}
+
+.cards li:nth-child(13){
+	left: 600px;
+	transform: rotate(105deg);
+}
+
+.cards li:nth-child(14){
+	left: 650px;
+	transform: rotate(115deg);
+}
+
+.cards li:nth-child(15){
+	left: 700px;
+	transform: rotate(125deg);
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
@@ -167,6 +207,4 @@ h1 {
 		float: right;
 		line-height: 64px;
 	}
-
->>>>>>> Danko
 }
