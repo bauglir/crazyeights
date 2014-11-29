@@ -36,6 +36,10 @@
             });
         };
 
+        comms.hasPeers = function hasPeers() {
+            return (Object.getOwnPropertyNames(comms.peers).length !== 0);
+        };
+
         // Sets another peer as the master of the current peer
         comms.join = function join(host_id) {
           var peer_connection = peer.connect(host_id);

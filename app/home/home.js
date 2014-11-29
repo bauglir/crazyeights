@@ -10,8 +10,16 @@
 
     function Home(comms, game_logic){
         var home = this;
-        home.name = "Hah Gaaaaame";
+
         home.comms = comms;
-		home.game = game_logic;
+
+        home.hostGame = function hostGame() {
+            console.log('Hosting a game');
+            home.is_hosting = true;
+        };
+
+        home.game = game_logic;
+        home.isHosting = false;
+        home.name = "Hah Gaaaaame";
     }
 })();
