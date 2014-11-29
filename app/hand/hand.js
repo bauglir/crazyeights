@@ -31,6 +31,16 @@
 			{id: 5,  suit: 'clubs', rank: '5'}
 		];
 
+		hand.setPlayers = function(players){
+
+			hand.players = players;
+		};
+
+		hand.setCard = function(cards){
+
+			hand.cards = cards;
+		};
+
 		hand.getSvg = function(Card){
 
 			var $path = Card.suit.charAt(0).toUpperCase() + Card.suit.slice(1);
