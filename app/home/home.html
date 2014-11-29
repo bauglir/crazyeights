@@ -2,3 +2,9 @@
 <pre>
 {{ home.comms | json }}
 </pre>
+
+<form no-validate ng-submit="home.comms.sendMessageTo(recipient, message)">
+  <input ng-model="recipient">
+  <input ng-model="message">
+  <input type="submit" value="Send Message">
+</form>
