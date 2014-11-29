@@ -4,11 +4,11 @@
 
 (function () {
 	"use strict";
-	angular.module('app').controller('Hand', Hand);
+	angular.module('app').controller('Hand', ['game_logic', Hand]);
 
 	Hand.$inject = [];
 
-	function Hand() {
+	function Hand(game_logic) {
 
 		var hand = this;
 
@@ -49,10 +49,10 @@
 			return 'svg%20playing%20cards/' + $path + '/' + $file;
 		};
 
-		hand.playCard = function(Card){
+		hand._playCard = function(Card){
 
-			// TODO: game logic playcard.
-			alert('You are going to play this card: ' + Card.suit + Card.rank);
+			// TODO: send user_id.
+			game_logic.playCard(1, Card);
 		};
 	}
 })();
