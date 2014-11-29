@@ -106,7 +106,7 @@
 
 			Card = Game.stack.shift();
 			Game.Host.cards = Game.Host.cards || [];
-			Game.Host.cards.push(Card);
+			Game.Host.cards.unshift(Card);
 			comms.send(Game.Host.id, {action: 'layoff', card: Card});
 		}
 
@@ -167,7 +167,7 @@
 
 				console.debug(user_id, 'playing card', card);
 
-				if(Game.order.reset() != user_id){
+				if(Game.order[0] != user_id){
 
 					throw new Error('Not player\'s turn.');
 				}
@@ -191,7 +191,7 @@
 					throw new Error('Player does not own this card.');
 				}
 
-				var topCard = Game.Host.cards.reset();
+				var topCard = Game.Host.cards[0];
 
 				if(!Game.config.isCardAllowed(topCard, card)){
 
@@ -202,7 +202,7 @@
 				console.debug('Player.cards', Player.cards);
 				console.debug('Game.order', Game.order);
 
-				Game.Host.cards.push(Player.cards.splice(i, 1));
+				Game.Host.cards.unshift(Player.cards.splice(i, 1));
 				Game.order.shift();
 				Game.order.push(user_id);
 
@@ -210,7 +210,7 @@
 				console.debug('Player.cards', Player.cards);
 				console.debug('Game.order', Game.order);
 
-				var next_user_id = Game.order.reset();
+				var next_user_id = Game.order[0];
 
 				console.debug('next_user_id', next_user_id);
 				comms.send(next_user_id, {action: 'turn', cards: Player.cards});
@@ -219,7 +219,7 @@
 
 			isCardAllowed: function isCardAllowed(Card){
 
-				var topCard = Game.Host.cards.reset();
+				var topCard = Game.Host.cards[0];
 				return Game.config.isCardAllowed(topCard, Card);
 			},
 
@@ -227,7 +227,7 @@
 
 				console.debug(user_id, 'grabs card');
 
-				if(Game.order.reset() != user_id){
+				if(Game.order[0] != user_id){
 
 					throw new Error('Not player\'s turn.')
 				}
