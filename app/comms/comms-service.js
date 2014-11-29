@@ -13,6 +13,22 @@
             $rootScope.$apply();
         });
 
+        peer.on('connection', function connectionEstablished(connection) {
+          connection.on('open', function connectionOpened() {
+              connection.on('data', function receiveData(data) {
+                  console.log(data);
+              });
+          });
+        });
+
+        comms.sendMessageTo = function sendMessageTo(recipient, message) {
+          var peer_connection = peer.connect(recipient);
+
+          peer_connection.on('open', function connectionOpened() {
+              peer_connection.send(message);
+          });
+        }
+
         return comms;
     }]);
 })();
