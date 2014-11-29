@@ -34,6 +34,7 @@
 
         comms.join = function join(host_id) {
           var peer_connection = peer.connect(host_id);
+          comms.peers[peer_connection.peer] = peer_connection;
 
           peer_connection.on('open', function connectionOpened() {
               peer_connection.send('join');

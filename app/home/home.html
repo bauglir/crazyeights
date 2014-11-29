@@ -24,7 +24,8 @@
 </form>
 
 <h3>Join Game</h3>
-<form no-validate ng-submit="home.comms.join(join.recipient)">
-  <input ng-model="join.recipient">
-  <input type="submit" value="Join">
+<form no-validate >
+  <label for="host_id">Host ID:</label>
+  <input id="host_id" ng-model="host.id">
+  <input type="button" value="Join" ng-click="home.comms.join(host.id)">
 </form>
