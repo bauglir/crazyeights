@@ -4,11 +4,11 @@
 
 (function () {
 	"use strict";
-	angular.module('app').controller('Hand', ['game_logic', Hand]);
+	angular.module('app').controller('Hand', ['game_configs', 'game_logic', Hand]);
 
 	Hand.$inject = [];
 
-	function Hand(game_logic) {
+	function Hand(game_configs, game_logic) {
 
 		var hand = this;
 
@@ -25,13 +25,8 @@
 			{username: 'David'}
 		];
 
-		hand.cards = [
-			{id: 1,  suit: 'clubs', rank: 'A'},
-			{id: 2,  suit: 'clubs', rank: '2'},
-			{id: 3,  suit: 'clubs', rank: '3'},
-			{id: 4,  suit: 'clubs', rank: '4'},
-			{id: 5,  suit: 'clubs', rank: '5'}
-		];
+		hand.random = Math.floor(Math.random() * game_configs.cards.length);
+		hand.cards = game_configs.cards.slice(hand.random - game_configs.Pesten.deal_count, hand.random);
 
 		hand.setPlayers = function(players){
 
