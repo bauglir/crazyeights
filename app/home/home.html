@@ -27,6 +27,12 @@
   <input type="submit" value="Send">
 </form>
 
+<h3>Create Game</h3>
+<form no-validate ng-submit="home.game.createGame(game.player_count)">
+	<input ng-model="game.player_count">
+	<input type="submit" value="Create">
+</form>
+
 <h3>Join Game</h3>
 <form no-validate >
   <label for="host_id">Host ID:</label>

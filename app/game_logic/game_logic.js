@@ -8,7 +8,7 @@
 	"use strict";
 
 	angular.module('app')
-		.service('game_logic',[ 'comms', function(comms){
+		.service('game_logic',[ 'comms', 'game_configs', function(comms, game_configs){
 
 		var cards = [
 			{id: 1,  suit: 'clubs', rank: 'A'},
@@ -67,12 +67,11 @@
 		];
 
 		var Game = {
-
+			config: game_configs.Pesten,
 			player_count: 0,
 			Host: null,
 			players: {},
 			stack: [],
-			layoff: [],
 			order: []
 		};
 
@@ -86,7 +85,7 @@
 			var dealt = 0;
 			var Card;
 
-			while(dealt < 7){
+			while(dealt < Game.config.deal_count){
 
 				for(var i = 0; i < Game.order.length; i++){
 
@@ -96,7 +95,7 @@
 					Player.cards = Player.cards || [];
 					Card = Game.stack.shift();
 
-					comms.sendCard(Player.id, Card); // TODO
+					comms.send(Player.id, {action: 'cards', cards: Player.cards});
 
 					Player.cards.push(Card);
 				}
@@ -105,26 +104,35 @@
 			}
 
 			Card = Game.stack.shift();
-			Game.layoff.push(Card);
-			comms.sendCard(Game.Host.id, Card); // TODO
+			Game.Host.cards = Game.Host.cards || [];
+			Game.Host.cards.push(Card);
+			comms.send(Game.Host.id, {action: 'layoff', card: Card});
 		}
 
 		return {
 
 			createGame: function startGame(player_count){
 
+				console.debug('creating game', player_count);
+
 				Game.player_count = player_count;
 				Game.players = {};
 				Game.order = [];
 				Game.Host = null;
+
+				console.table(Game);
 			},
 
 			setHost: function setHost(User){
+
+				console.debug('setting host', User);
 
 				Game.Host = User;
 			},
 
 			addPlayer: function addPlayer(User){
+
+				console.debug('adding player', User);
 
 				if(Game.player_count >= Game.order.length){
 
@@ -133,24 +141,34 @@
 
 				Game.players[User.id] = User;
 				Game.order.push(User.id);
+
+				console.debug(Game.players);
+				console.debug(Game.order);
 			},
 
 			getPlayerCount: function getPlayerCount(){
+
+				console.debug('Returning player count', Game.order.length, Game.player_count);
 
 				return [Game.order.length, Game.player_count];
 			},
 
 			startGame: function startGame(){
 
+				console.debug('Starting game');
+
 				Game.stack = shuffle(cards);
+				console.debug(Game.stack, cards);
 				deal();
 			},
 
 			playCard: function playCard(user_id, card){
 
+				console.debug(user_id, 'playing card', card);
+
 				if(Game.order.reset() != user_id){
 
-					throw new Error('Not player\'s turn.')
+					throw new Error('Not player\'s turn.');
 				}
 
 				var Player = Game.players[user_id];
@@ -172,33 +190,41 @@
 					throw new Error('Player does not own this card.');
 				}
 
-				if(!this.isCardAllowed(card)){
+				var topCard = Game.Host.cards.reset();
+
+				if(!Game.config.isCardAllowed(topCard, card)){
 
 					throw new Error('Card is not allowed.')
 				}
 
-				Game.layoff.push(Player.cards.splice(i, 1));
+				console.debug('Game.Host.cards', Game.Host.cards);
+				console.debug('Player.cards', Player.cards);
+				console.debug('Game.order', Game.order);
+
+				Game.Host.cards.push(Player.cards.splice(i, 1));
 				Game.order.shift();
 				Game.order.push(user_id);
+
+				console.debug('Game.Host.cards', Game.Host.cards);
+				console.debug('Player.cards', Player.cards);
+				console.debug('Game.order', Game.order);
+
+				var next_user_id = Game.order.reset();
+
+				console.debug('next_user_id', next_user_id);
+				comms.send(next_user_id, {action: 'turn', cards: Player.cards});
+				comms.send(Game.Host.id, {action: 'layoff', card: card});
 			},
 
 			isCardAllowed: function isCardAllowed(Card){
 
-				if(!Card.suit && !Card.rank){
-
-					return true;
-				}
-
-				var topCard = Game.layoff.reset();
-				if(Card.suit == topCard.suit){
-
-					return true;
-				}
-
-				return Card.rank == topCard.rank;
+				var topCard = Game.Host.cards.reset();
+				return Game.config.isCardAllowed(topCard, Card);
 			},
 
 			grabCard: function grabCard(user_id){
+
+				console.debug(user_id, 'grabs card');
 
 				if(Game.order.reset() != user_id){
 
@@ -207,11 +233,17 @@
 
 				var Card = Game.stack.shift();
 
+				console.debug('Player.cards', Game.players[user_id].cards);
+				console.debug('Game.order', Game.order);
 				Game.players[user_id].cards.push(Card);
+
 				Game.order.shift();
 				Game.order.push(user_id);
 
-				comms.sendCard(user_id, Card); // TODO
+				console.debug('Player.cards', Game.players[user_id].cards);
+				console.debug('Game.order', Game.order);
+
+				comms.send(user_id, {action: 'cards', cards: Game.players[user_id].cards});
 			}
 		};
 	}]);
