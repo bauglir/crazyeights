@@ -3,5 +3,5 @@
  */
 (function () {
     "use strict";
-    angular.module('app', ['ngRoute','app.user']);
+    angular.module('app', ['ngRoute','app.user', 'monospaced.qrcode']);
 })();
