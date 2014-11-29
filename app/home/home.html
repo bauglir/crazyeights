@@ -18,7 +18,7 @@
 
   <div ng-show="home.is_hosting">
       {{ home.comms.id }}
-	  <qrcode data="{{window.location.href + '?host=' + home.comms.id}}" size="50"></qrcode>
+	  <qrcode data="{{$location + '?host=' + home.comms.id}}" size="50"></qrcode>
   </div>
 
 	<hr>
