@@ -10,7 +10,7 @@
 	angular.module('app')
 		.service('game_logic',[ 'game_configs', function(game_configs){
 
-    var comms;
+    	var comms;
 
 		var Game = {
 			config: game_configs.Pesten,
@@ -21,7 +21,7 @@
 			order: []
 		};
 
-    var has_started = false;
+    	var has_started = false;
 
 		function shuffle(o){
 			for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -82,6 +82,11 @@
 			addPlayer: function addPlayer(User){
 
 				console.debug('adding player', User);
+
+				if(has_started){
+
+					throw new Error("Game has already started")
+				}
 
 				if(Game.player_count <= Game.order.length){
 
@@ -218,6 +223,12 @@
 				console.debug('Game.order', Game.order);
 
 				comms.send(user_id, {action: 'cards', cards: Game.players[user_id].cards});
+
+				var next_user_id = Game.order[0];
+
+				console.debug('next_user_id', next_user_id);
+				var Player = Game.players[next_user_id];
+				comms.send(next_user_id, {action: 'turn', cards: Player.cards, top: Game.Host.cards[0]});
 			}
 		};
 	}]);
