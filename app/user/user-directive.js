@@ -6,12 +6,11 @@ angular.module('app.user',[])
         controllerAs: 'user',
         controller: function(){
             var user = this;
-            
-            user.hostgame = function hostgame(hostid) {
-                console.log(hostid);  
+            user.hostgame = function hostgame() {
+                console.log(user.hostid);  
             };
-            user.joingame = function user.joingame(hostid,username){
-                console.log(hostid,username);  
+            user.joingame = function joingame(){
+                console.log(user.username,user.hostid);  
             };
         }
     }
