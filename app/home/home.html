@@ -17,8 +17,8 @@
 </form>
 
 <h4>Send Private Message</h4>
-<form no-validate ng-submit="home.comms.send(send.recipient, send.message)">
-  <select ng-model="send.recipient" ng-options="peer_id for (peer_id, peer) in home.comms.peers"></select>
+<form no-validate ng-submit="home.comms.send(send.recipient_id, send.message)">
+  <select ng-model="send.recipient_id" ng-options="peer_id as peer_id for (peer_id, _) in home.comms.peers"></select>
   <input ng-model="send.message">
   <input type="submit" value="Send">
 </form>

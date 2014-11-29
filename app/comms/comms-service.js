@@ -45,8 +45,8 @@
           });
         };
 
-        comms.send = function send(client, message) {
-            client.send(message);
+        comms.send = function send(client_id, message) {
+            comms.peers[client_id].send(message);
         };
 
         return comms;
