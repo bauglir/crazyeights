@@ -1,1 +1,29 @@
-<h1>Home {{home.name}}</h1>
+<h1>Home {{ home.name }}</h1>
+
+<hr>
+
+<h2>Debug</h2>
+<pre>
+{{ home.comms.received_messages | json }}
+</pre>
+
+<h3>Host: {{ home.comms.id }}</h3>
+
+<h4>Broadcast Message</h4>
+<form no-validate ng-submit="home.comms.broadcast(broadcast.message)">
+  <input ng-model="broadcast.message">
+  <input type="submit" value="Broadcast">
+</form>
+
+<h4>Send Private Message</h4>
+<form no-validate ng-submit="home.comms.send(send.recipient, send.message)">
+  <select ng-model="send.recipient" ng-options="peer_id for (peer_id, peer) in home.comms.peers"></select>
+  <input ng-model="send.message">
+  <input type="submit" value="Send">
+</form>
+
+<h3>Join Game</h3>
+<form no-validate ng-submit="home.comms.join(join.recipient)">
+  <input ng-model="join.recipient">
+  <input type="submit" value="Join">
+</form>
