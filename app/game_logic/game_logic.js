@@ -7,8 +7,8 @@
 
 	"use strict";
 
-	angular.module('app', ['comms'])
-		.service('game_logic', function(comms){
+	angular.module('app')
+		.service('game_logic',[ 'comms', function(comms){
 
 		var cards = [
 			{id: 1,  suit: 'clubs', rank: 'A'},
@@ -214,5 +214,5 @@
 				comms.sendCard(user_id, Card); // TODO
 			}
 		};
-	});
+	}]);
 })();
