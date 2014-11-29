@@ -4,7 +4,7 @@
     angular.module('app').service('comms', ['$rootScope', function Comms($rootScope) {
         var comms = {
             id: '<not set>',
-            peers: [],
+            peers: {},
             received_messages: []
         };
 
@@ -16,7 +16,7 @@
         });
 
         peer.on('connection', function connectionEstablished(connection) {
-          comms.peers.push(connection);
+          comms.peers[connection.peer] = connection;
 
           connection.on('open', function connectionOpened() {
               connection.on('data', function receiveData(data) {
@@ -43,7 +43,11 @@
                   $rootScope.$apply();
               });
           });
-        }
+        };
+
+        comms.send = function send(client, message) {
+            client.send(message);
+        };
 
         return comms;
     }]);
