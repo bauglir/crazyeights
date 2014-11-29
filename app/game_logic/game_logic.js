@@ -8,7 +8,9 @@
 	"use strict";
 
 	angular.module('app')
-		.service('game_logic',[ 'comms', 'game_configs', function(comms, game_configs){
+		.service('game_logic',[ 'game_configs', function(game_configs){
+
+    var comms;
 
 		var Game = {
 			config: game_configs.Pesten,
@@ -18,6 +20,8 @@
 			stack: [],
 			order: []
 		};
+
+    var has_started = false;
 
 		function shuffle(o){
 			for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -55,9 +59,11 @@
 
 		return {
 
-			createGame: function startGame(player_count){
+			createGame: function createGame(comms_instance, player_count){
 
 				console.debug('creating game', player_count);
+
+        comms = comms_instance;
 
 				Game.player_count = player_count;
 				Game.players = {};
@@ -97,9 +103,19 @@
 				return [Game.order.length, Game.player_count];
 			},
 
+      getGameState: function() {
+        console.log(Game);
+      },
+
+      hasStarted: function hasStarted() {
+        return has_started;
+      },
+
 			startGame: function startGame(){
 
 				console.debug('Starting game');
+
+        has_started = true;
 
 				Game.stack = shuffle(game_configs.cards);
 				console.debug(Game.stack, game_configs.cards);

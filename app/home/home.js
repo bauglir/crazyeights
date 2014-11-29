@@ -14,8 +14,8 @@
         home.comms = comms;
 
         home.hostGame = function hostGame() {
-            console.log('Hosting a game');
             home.is_hosting = true;
+            game_logic.createGame(comms, 4);
         };
 
         home.game = game_logic;

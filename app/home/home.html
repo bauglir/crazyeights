@@ -3,7 +3,7 @@
 
   <user ng-hide="user.name"></user>
 
-  <div ng-show="user.name && !home.comms.hasPeers() && !home.is_hosting">
+  <div ng-show="user.name && !home.comms.hasPeers(1) && !home.is_hosting">
     <h2>Hi {{ user.name }}</h2>
 
     <form no-validate ng-submit="home.comms.join(game_id)">
@@ -19,6 +19,14 @@
   <div ng-show="home.is_hosting">
       {{ home.comms.id }}
 	  <qrcode data="{{$location + '?host=' + home.comms.id}}" size="50"></qrcode>
+
+      <form no-validate ng-submit="home.game.startGame()">
+          <input type="submit" value="Start Game" ng-disabled="!home.comms.hasPeers(2) || home.game.hasStarted()">
+      </form>
+  </div>
+
+  <div ng-show="home.comms.hasPeers(1) && !home.is_hosting">
+    Waiting for game to start...
   </div>
 
 	<hr>
@@ -66,4 +74,8 @@
 			<input type="button" value="Join" ng-click="home.comms.join(host.id)">
 		</form>
 	</div>
+
+  <div class="Debug">
+    {{ home.game.getGameState() }}
+  </div>
 </div>
