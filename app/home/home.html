@@ -1,10 +1,16 @@
 <h1>{{home.name}}</h1>
 <pre>
-{{ home.comms | json }}
+{{ home.comms.received_messages | json }}
 </pre>
 
-<form no-validate ng-submit="home.comms.sendMessageTo(recipient, message)">
-  <input ng-model="recipient">
+<h2>Host: {{ home.comms.id }}</h2>
+<form no-validate ng-submit="home.comms.broadcast(message)">
   <input ng-model="message">
-  <input type="submit" value="Send Message">
+  <input type="submit" value="Broadcast">
+</form>
+
+<h2>Client</h2>
+<form no-validate ng-submit="home.comms.join(recipient)">
+  <input ng-model="recipient">
+  <input type="submit" value="Join">
 </form>
