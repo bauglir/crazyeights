@@ -11,6 +11,13 @@
 				   controllerAs : "login"
 			   }
 		   );
+		   $routeProvider.when('/table',
+			   {
+				   templateUrl: 'app/table/table.html',
+				   controller : "Table",
+				   controllerAs : "table"
+			   }
+		   );
            $routeProvider.when('/',
                {
                    templateUrl : "app/home/home.html",
