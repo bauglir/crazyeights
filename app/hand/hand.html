@@ -1,11 +1,11 @@
 <ul class="users">
-	<li ng-repeat="player in table.players">
+	<li ng-repeat="player in hand.players">
 		{{player.username}}
 	</li>
 </ul>
 
 <ul class="cards">
-	<li ng-repeat="card in table.cards">
-		<img ng-click="table.playCard(card)" src="{{table.getSvg(card)}}" title="{{card.suit}}  {{card.rank}}" />
+	<li ng-repeat="card in hand.cards">
+		<img ng-click="hand.playCard(card)" src="{{hand.getSvg(card)}}" title="{{card.suit}}  {{card.rank}}" />
 	</li>
 </ul>
