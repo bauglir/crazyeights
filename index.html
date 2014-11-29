@@ -14,9 +14,22 @@
     <script src="bower_components/qrcode-generator/js/qrcode.js"></script>
 </head>
 <body>
-<div ng-view="">
-
+<div id="header">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-4"><img src="img/logo.jpg" alt="Pesten!" class="logo" /></div>
+			<div class="col-xs-8"><div class="user">Welkom, username.</div></div>
+		</div>
+	</div>
 </div>
+<div id="main">
+	<div class="container">
+		<div class="row">
+			<div ng-view=""></div>
+		</div>
+	</div>
+</div>
+<div id="footer"></div>
 <script src="app/app.js"></script>
 <script src="app/config.route.js"></script>
 <script src="app/home/home.js"></script>
@@ -25,6 +38,8 @@
 <script src="app/game_logic/game_logic.js"></script>
 <script src="app/game_logic/game_configs.js"></script>
 <script src="app/login/login.js"></script>
+<script src="app/table/table.js"></script>
+<script src="app/hand/hand.js"></script>
 
 </body>
 </html>

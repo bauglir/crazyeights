@@ -1,9 +1,172 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans');
+
+body, html {
+	height: 100%;
+	min-height: 100%;
+	overflow: auto;
+}
+
 body {
-	border-top: 4px solid #01579b;
-	height: 64px;
+	padding: 0 0 0 30px;
+}
+
+h1 {
+	clear: both;
 }
 
 .Debug{
 	float: left;
 	margin: 10px;
+	font-family: 'Open Sans', Arial;
+}
+
+.login-modal {
+	background: #f4f4f4;
+	min-height: 280px;
+	padding: 15px;
+	clear: both;
+	margin: 15px 0;
+}
+
+.login-modal h1 {
+	color: #1e88e5;
+	font-size: 18px;
+	margin: 20px 0 20px 0;
+}
+
+.login-modal p {
+	color: #c5c5c5;
+	line-height: 24px;
+}
+
+.login-modal input, .login-modal select {
+	width: 100%;
+	border: none;
+	padding: 8px;
+	box-sizing: border-box;
+	margin: 15px 0 0 0;
+}
+
+.login-modal .formsubmit {
+	background: #1e88e5;
+	color: white;
+	text-transform: uppercase;
+}
+
+.graphic {
+	background: #1e88e5 url('../../img/graphic.png') center center no-repeat;
+	width: 118px;
+	height: 118px;
+	border: 1px solid #1e88e5;
+	border-radius: 50%;
+	margin: 20px 0 0 0;
+}
+
+#header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 30px;
+	background: #1e88e5;
+	overflow: hidden;
+}
+
+#header * {
+	visibility: hidden;
+}
+
+.users {
+	overflow: hidden;
+	margin: 0 0 0 -15px;
+	padding: 30px 0 60px 0;
+}
+
+.users li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	padding: 0 15px;
+}
+
+.cards {
+	position: relative;
+	margin: 0 0 0 33px;
+}
+
+.cards li {
+	position: absolute;
+	top: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cards li:nth-child(1){
+	left: 0px;
+	transform: rotate(-15deg);
+}
+
+.cards li:nth-child(2){
+	left: 50px;
+	transform: rotate(-5deg);
+}
+
+.cards li:nth-child(3){
+	left: 100px;
+	transform: rotate(5deg);
+}
+
+.cards li:nth-child(4){
+	left: 150px;
+	transform: rotate(15deg);
+}
+
+.cards li:nth-child(5){
+	left: 200px;
+	transform: rotate(25deg);
+}
+
+.cards li:nth-child(6){
+	left: 250px;
+	transform: rotate(35deg);
+}
+
+.cards li:nth-child(7){
+	left: 300px;
+	transform: rotate(45deg);
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+	body {
+		border-top: 4px solid #01579b;
+		padding: 0;
+	}
+
+	#header {
+		position: static;
+		height: 64px;
+		width: auto;
+		color: white;
+		-webkit-box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.25);
+		-moz-box-shadow:    0px 2px 5px 0px rgba(50, 50, 50, 0.25);
+		box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.25);
+	}
+
+	#header * {
+		visibility: visible;
+	}
+
+	.logo {
+		padding: 10px 0 0 0;
+	}
+
+	.user {
+		float: right;
+		line-height: 64px;
+	}
+
+>>>>>>> Danko
 }

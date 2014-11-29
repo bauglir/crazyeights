@@ -1,22 +1,14 @@
-<div id="header">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-4">PESTEN!</div>
-			<div class="col-sm-8"><div class="user" ng-if="username">Welkom, {{username}}</div></div>
-		</div>
-	</div>
+<div class="col-xs-12">
+	<form ng-submit="submit()">
+		<h1>Login to this wonderful Hah Gaaaaame!</h1>
+		<label for="username">Username:</label>
+		<input id="username" type="text" ng-model="text" />
+		<button type="submit">Let's play!</button>
+	</form>
+
+	<select ng-model="card" ng-change="setCard()">
+		<option ng-repeat="c in login.cards" value="{{c}}">{{c.suit}} {{c.rank}}</option>
+	</select>
+
+	<div style="background: url('{{currentCard}}') center center; width: 225px; height: 314px;"></div>
 </div>
-<form ng-submit="submit()">
-	<h1>Login to this wonderful Hah Gaaaaame!</h1>
-	<label for="username">Username:</label>
-	<input id="username" type="text" ng-model="text" />
-	<button type="submit">Let's play!</button>
-</form>
-
-<select ng-model="card" ng-change="setCard()">
-	<option ng-repeat="c in login.cards" value="{{c}}">{{c.suit}} {{c.rank}}</option>
-</select>
-
-<br />
-
-<div style="background: url('{{currentCard}}') center center; width: 225px; height: 314px;"></div>

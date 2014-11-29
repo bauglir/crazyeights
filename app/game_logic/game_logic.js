@@ -129,7 +129,9 @@
 
 			playCard: function playCard(user_id, card){
 
-				console.debug(user_id, 'playing card', card);
+				// TODO: game logic playcard.
+				console.info('player ' + user_id + ' is going to play this card: '
+					+ card.suit + card.rank);
 
 				if(Game.order[0] != user_id){
 
