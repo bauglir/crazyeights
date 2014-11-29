@@ -1,0 +1,17 @@
+<div class="container">
+    <form name="loginForm" novalidate class="form-signin" role="form">
+          <p> 
+      <h2 class="form-signin-heading">Please sign in</h2>
+          </p><p> 
+        <label for="username" class="sr-only">username:</label>
+        <input type="text" class="form-control"  placeholder="username" id="username" ng-model="user.username">
+     </p><p>    
+        <label for="hostid" class="sr-only">hostid:</label>
+        <input type="hostid" class="form-control" placeholder="host id" id="hostid" ng-model="user.hostid">
+    </p><p>     
+        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="user.hostgame(username)">Host</button>
+    </p><p>    
+        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="user.joingame(hostid)">Join</button>
+    </p>
+    </form>
+</div>
