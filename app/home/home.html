@@ -11,18 +11,25 @@
         <input type="submit" value="Join">
     </form>
 
-    <form no-validate ng-submit="home.hostGame()">
+    <form no-validate ng-submit="home.hostGame(user)">
         <input type="submit" value="Host a game">
     </form>
   </div>
 
   <div ng-show="home.is_hosting">
-      {{ home.comms.id }}
-	  <qrcode data="{{$location + '?host=' + home.comms.id}}" size="50"></qrcode>
+      <div ng-hide="home.game.hasStarted()">
+          {{ home.comms.id }}
+          <qrcode data="{{$location + '?host=' + home.comms.id}}" size="50"></qrcode>
 
-      <form no-validate ng-submit="home.game.startGame()">
-          <input type="submit" value="Start Game" ng-disabled="!home.comms.hasPeers(2) || home.game.hasStarted()">
-      </form>
+          <form no-validate ng-submit="home.game.startGame()">
+              <input type="submit" value="Start Game" ng-disabled="!home.comms.hasPeers(2) || home.game.hasStarted()">
+          </form>
+      </div>
+
+      <div ng-show="home.game.hasStarted()">
+          <h3>Current layed off cards</h3>
+          {{ user.cards | json }}
+      </div>
   </div>
 
   <div ng-show="home.comms.hasPeers(1) && !home.is_hosting">

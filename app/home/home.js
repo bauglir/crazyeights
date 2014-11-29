@@ -13,10 +13,11 @@
 
         home.comms = comms;
 
-        home.hostGame = function hostGame() {
+        home.hostGame = function hostGame(user) {
+            user.id = comms.id;
             home.is_hosting = true;
             game_logic.createGame(comms, 4);
-            game_logic.setHost({ id: comms.id });
+            game_logic.setHost(user);
         };
 
         home.game = game_logic;
