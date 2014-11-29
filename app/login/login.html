@@ -10,7 +10,7 @@
 	<pre ng-if="username">Welcome {{username}}! What is the next step?</pre>
 
 	<select ng-model="card" ng-change="setCard()">
-		<option ng-repeat="c in login.cards" value="{{c.path}}">{{c.name}}</option>
+		<option ng-repeat="c in login.cards" value="{{c}}">{{c.suit}} {{c.rank}}</option>
 	</select>
 
 	<br />
