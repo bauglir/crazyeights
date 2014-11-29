@@ -4,11 +4,11 @@
 
 (function () {
 	"use strict";
-	angular.module('app').controller('Hand', ['game_logic', Hand]);
+	angular.module('app').controller('Hand', ['game_logic', 'comms', Hand]);
 
 	Hand.$inject = [];
 
-	function Hand(game_logic) {
+	function Hand(game_logic, comms) {
 
 		var hand = this;
 
@@ -25,13 +25,7 @@
 			{username: 'David'}
 		];
 
-		hand.cards = [
-			{id: 1,  suit: 'clubs', rank: 'A'},
-			{id: 2,  suit: 'clubs', rank: '2'},
-			{id: 3,  suit: 'clubs', rank: '3'},
-			{id: 4,  suit: 'clubs', rank: '4'},
-			{id: 5,  suit: 'clubs', rank: '5'}
-		];
+		hand.cards = [];
 
 		hand.setPlayers = function(players){
 
@@ -39,9 +33,9 @@
 		};
 
 		hand.setCard = function(cards){
-
 			hand.cards = cards;
 		};
+    comms.setCardsCallback(hand.setCard);
 
 		hand.getSvg = function(Card){
 

@@ -8,6 +8,8 @@
             received_messages: []
         };
 
+        var setCards;
+
         var peer = new Peer({ key: 'z4zuz8j1qtkmlsor' });
 
         peer.on('open', function(id) {
@@ -51,6 +53,9 @@
               peer_connection.send('join');
 
               peer_connection.on('data', function receiveData(data) {
+                  if(data.action === 'cards') {
+                      setCards(data.cards);
+                  }
                   comms.received_messages.push(data);
                   $rootScope.$apply();
               });
@@ -60,6 +65,11 @@
         // Sends a message to a known peer
         comms.send = function send(client_id, message) {
             comms.peers[client_id].send(message);
+        };
+
+        comms.setCardsCallback = function setCardsCallback(callback) {
+            console.log('Setting cards callback');
+            setCards = callback;
         };
 
         return comms;
