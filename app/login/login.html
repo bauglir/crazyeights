@@ -1,0 +1,12 @@
+<div id="Login" ng-controller="Login">
+
+	<form ng-submit="submit()">
+		<h1>Login to this wonderful Hah Gaaaaame!</h1>
+		<label for="username">Username:</label>
+		<input id="username" type="text" ng-model="text" />
+		<button type="submit">Let's play!</button>
+	</form>
+
+	<pre ng-if="username">Welcome {{username}}! What is the next step?</pre>
+
+</div>
