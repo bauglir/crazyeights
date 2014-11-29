@@ -11,6 +11,16 @@
 	function Table() {
 
 		var table = this;
-		table.players = 4;
+
+		// TODO: get the userlist from the game_logic.
+
+		table.players = [
+			{username: 'Danko'},
+			{username: 'Indigo'},
+			{username: 'Wema'},
+			{username: 'Rob'},
+			{username: 'Joris'},
+			{username: 'David'}
+		];
 	}
 })();

@@ -1,1 +1,5 @@
-<span>Players: {{table.players}}</span>
+<ul class="users">
+	<li ng-repeat="player in table.players">
+		{{player.username}}
+	</li>
+</ul>
