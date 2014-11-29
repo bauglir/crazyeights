@@ -2,3 +2,8 @@ body {
 	border-top: 4px solid #01579b;
 	height: 64px;
 }
+
+.Debug{
+	float: left;
+	margin: 10px;
+}

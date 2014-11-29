@@ -1,41 +1,50 @@
-<h1>Home {{home.name}}</h1>
-<user>
-    {{user.name}}
-</user>
-<h1>{{ home.name }}</h1>
 
-<hr>
+	<h1>{{home.name}}</h1>
+	<user>
+		{{user.name}}
+	</user>
+	<hr>
+	<h2>Debug</h2>
 
-<h2>Debug</h2>
+	<pre class="Debug">
+	{{ home.comms.received_messages | json }}
+	</pre>
 
-<pre>
-{{ home.comms.received_messages | json }}
-</pre>
+	<h3 class="Debug">Host: {{ home.comms.id }}</h3>
 
-<h3>Host: {{ home.comms.id }}</h3>
+	<br style="clear: both">
 
-<h4>Broadcast Message</h4>
-<form no-validate ng-submit="home.comms.broadcast(broadcast.message)">
-  <input ng-model="broadcast.message">
-  <input type="submit" value="Broadcast">
-</form>
+	<div class="Debug">
+		<h4>Broadcast Message</h4>
+		<form no-validate ng-submit="home.comms.broadcast(broadcast.message)">
+			<input ng-model="broadcast.message">
+			<input type="submit" value="Broadcast">
+		</form>
+	</div>
 
-<h4>Send Private Message</h4>
-<form no-validate ng-submit="home.comms.send(send.recipient_id, send.message)">
-  <select ng-model="send.recipient_id" ng-options="peer_id as peer_id for (peer_id, _) in home.comms.peers"></select>
-  <input ng-model="send.message">
-  <input type="submit" value="Send">
-</form>
+	<div class="Debug">
+		<h4>Send Private Message</h4>
+		<form no-validate ng-submit="home.comms.send(send.recipient_id, send.message)">
+			<select ng-model="send.recipient_id" ng-options="peer_id as peer_id for (peer_id, _) in home.comms.peers"></select>
+			<input ng-model="send.message">
+			<input type="submit" value="Send">
+		</form>
+	</div>
 
-<h3>Create Game</h3>
-<form no-validate ng-submit="home.game.createGame(game.player_count)">
-	<input ng-model="game.player_count">
-	<input type="submit" value="Create">
-</form>
+	<div class="Debug">
+		<h4>Create Game</h4>
+		<form no-validate ng-submit="home.game.createGame(game.player_count)">
+			<input ng-model="game.player_count">
+			<input type="submit" value="Create">
+		</form>
+	</div>
 
-<h3>Join Game</h3>
-<form no-validate >
-  <label for="host_id">Host ID:</label>
-  <input id="host_id" ng-model="host.id">
-  <input type="button" value="Join" ng-click="home.comms.join(host.id)">
-</form>
+
+	<div class="Debug">
+		<h4>Join Game</h4>
+		<form no-validate >
+			<label for="host_id">Host ID:</label>
+			<input id="host_id" ng-model="host.id">
+			<input type="button" value="Join" ng-click="home.comms.join(host.id)">
+		</form>
+	</div>

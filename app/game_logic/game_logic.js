@@ -58,10 +58,11 @@
 			{id: 45, suit: 'spades', rank: '6'},
 			{id: 46, suit: 'spades', rank: '7'},
 			{id: 47, suit: 'spades', rank: '8'},
-			{id: 49, suit: 'spades', rank: '9'},
-			{id: 50, suit: 'spades', rank: '10'},
-			{id: 51, suit: 'spades', rank: 'J'},
-			{id: 52, suit: 'spades', rank: 'Q'},
+			{id: 48, suit: 'spades', rank: '9'},
+			{id: 49, suit: 'spades', rank: '10'},
+			{id: 50, suit: 'spades', rank: 'J'},
+			{id: 51, suit: 'spades', rank: 'Q'},
+			{id: 52, suit: 'spades', rank: 'K'},
 			{id: 53, suit: null, rank: null},
 			{id: 54, suit: null, rank: null}
 		];
