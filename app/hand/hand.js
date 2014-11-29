@@ -17,7 +17,7 @@
 
 		// TODO: get the userlist from the game_logic.
 		hand.players = [
-			{username: 'Danko'},
+			{username: 'Danko', active: true},
 			{username: 'Inigo'},
 			{username: 'Wema'},
 			{username: 'Rob'},
