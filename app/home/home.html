@@ -6,7 +6,7 @@
   <div ng-show="home.is_hosting">
       <div ng-hide="home.game.hasStarted()">
           {{ home.comms.id }}
-          <qrcode data="{{$location + '?host=' + home.comms.id}}" size="50"></qrcode>
+          <qrcode data="{{ home.game_uri + '?host=' + home.comms.id }}" size="100"></qrcode>
 
           <form no-validate ng-submit="home.game.startGame()">
               <input type="submit" value="Start Game" ng-disabled="!home.comms.hasPeers(2) || home.game.hasStarted()">
