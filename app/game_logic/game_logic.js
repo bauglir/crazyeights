@@ -194,7 +194,8 @@
 				var next_user_id = Game.order[0];
 
 				console.debug('next_user_id', next_user_id);
-				comms.send(next_user_id, {action: 'turn', cards: Player.cards, top: Game.Host.cards[0]});
+        comms.send(user_id, { action: 'cards', cards: Player.cards });
+				comms.send(next_user_id, {action: 'turn', cards: Game.players[next_user_id].cards, top: Game.Host.cards[0]});
 			},
 
 			isCardAllowed: function isCardAllowed(Card){
