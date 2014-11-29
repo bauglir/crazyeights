@@ -33,7 +33,7 @@
 			var dealt = 0;
 			var Card;
 
-			while(dealt <= Game.config.deal_count){
+			while(dealt < Game.config.deal_count){
 
 				for(var i = 0; i < Game.order.length; i++){
 
@@ -43,12 +43,15 @@
 					Player.cards = Player.cards || [];
 					Card = Game.stack.shift();
 
-					comms.send(Player.id, {action: 'cards', cards: Player.cards});
-
 					Player.cards.push(Card);
+
+					comms.send(Player.id, {action: 'cards', cards: Player.cards});
+					console.debug('player', Player.id, Player.cards);
 				}
 
 				dealt++;
+
+				console.debug('dealt', dealt);
 			}
 
 			Card = Game.stack.shift();
