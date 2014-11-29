@@ -46,12 +46,9 @@
 					Player.cards.push(Card);
 
 					comms.send(Player.id, {action: 'cards', cards: Player.cards});
-					console.debug('player', Player.id, Player.cards);
 				}
 
 				dealt++;
-
-				console.debug('dealt', dealt);
 			}
 
 			Card = Game.stack.shift();
@@ -125,8 +122,10 @@
 
 				has_started = true;
 
-				Game.stack = shuffle(game_configs.cards);
-				console.debug(Game.stack, game_configs.cards);
+				// Using slice to create a clone.
+				Game.stack = shuffle(game_configs.cards.slice(0));
+				console.debug(Game.stack);
+				console.debug(game_configs.cards);
 				deal();
 
 				var next_user_id = Game.order[0];
