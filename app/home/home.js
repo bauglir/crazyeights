@@ -6,11 +6,12 @@
 
     angular.module('app').controller('Home', Home);
 
-    Home.$inject = ['comms'];
+    Home.$inject = ['comms', 'game_logic'];
 
-    function Home(comms){
+    function Home(comms, game_logic){
         var home = this;
         home.name = "Hah Gaaaaame";
         home.comms = comms;
+		home.game = game_logic;
     }
 })();

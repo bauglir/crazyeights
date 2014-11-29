@@ -72,7 +72,6 @@
 			Host: null,
 			players: {},
 			stack: [],
-			layoff: [],
 			order: []
 		};
 
@@ -105,7 +104,8 @@
 			}
 
 			Card = Game.stack.shift();
-			Game.layoff.push(Card);
+			Game.Host.cards = Game.Host.cards || [];
+			Game.Host.cards.push(Card);
 			comms.send(Game.Host.id, Card);
 		}
 
@@ -113,10 +113,14 @@
 
 			createGame: function startGame(player_count){
 
+				console.debug('creating game');
+
 				Game.player_count = player_count;
 				Game.players = {};
 				Game.order = [];
 				Game.Host = null;
+
+				console.table(Game);
 			},
 
 			setHost: function setHost(User){
@@ -177,7 +181,7 @@
 					throw new Error('Card is not allowed.')
 				}
 
-				Game.layoff.push(Player.cards.splice(i, 1));
+				Game.Host.cards.push(Player.cards.splice(i, 1));
 				Game.order.shift();
 				Game.order.push(user_id);
 			},
@@ -189,7 +193,7 @@
 					return true;
 				}
 
-				var topCard = Game.layoff.reset();
+				var topCard = Game.Host.cards.reset();
 				if(Card.suit == topCard.suit){
 
 					return true;
