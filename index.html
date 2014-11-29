@@ -14,22 +14,33 @@
     <script src="bower_components/qrcode-generator/js/qrcode.js"></script>
 </head>
 <body>
-<div id="header">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-4"><img src="img/logo.jpg" alt="Pesten!" class="logo" /></div>
-			<div class="col-xs-8"><div class="user">Welkom, username.</div></div>
-		</div>
-	</div>
+<div class="container">
+  <div id="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-4"><img src="img/logo.jpg" alt="Pesten!" class="logo" /></div>
+        <div class="col-xs-8"><div class="user">Welkom, username.</div></div>
+      </div>
+    </div>
+  </div>
+  <div id="main">
+    <div class="container">
+      <div class="row">
+        <div ng-view=""></div>
+      </div>
+    </div>
+  </div>
 </div>
-<div id="main">
-	<div class="container">
-		<div class="row">
-			<div ng-view=""></div>
-		</div>
-	</div>
-</div>
-<div id="footer"></div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">
+      Made with &#x2665; by <a href="https://github.com/Alfalfamale">@Alfalfamale</a>, <a href="https://github.com/bauglir">@bauglir</a>, <a href="https://github.com/cmddavid">@cmddavid</a>, <a href="https://github.com/DankoAdamczyk">@DankoAdamczyk</a>, <a href="https://github.com/webconstructor">@webconstructor</a> and <a href="https://github.com/Wema">@Wema</a> at <a href="https://plus.google.com/events/c1b0q798cb6mg08pgl3ac1g700c">ng-spa 2014</a>.
+    </p>
+    <p class="text-muted">
+    Special thanks to <a href="https://github.com/barrynijenhuis">@barrynijenhuis</a>, <a href="https://github.com/bobbijvoet">@bobbijvoet</a>, <a href="https://github.com/CarmenPopoviciu">@CarmenPopoviciu</a> and <a href="https://github.com/SanderElias">@SanderElias</a> for organizing and hosting.
+    </p>
+  </div>
+</footer>
 <script src="app/app.js"></script>
 <script src="app/config.route.js"></script>
 <script src="app/home/home.js"></script>
