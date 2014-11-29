@@ -8,7 +8,7 @@
 	"use strict";
 
 	angular.module('app', ['comms'])
-		.factory('game_logic', function(comms){
+		.service('game_logic', function(comms){
 
 		var cards = [
 			{id: 1,  suit: 'clubs', rank: 'A'},
@@ -84,6 +84,7 @@
 		function deal(){
 
 			var dealt = 0;
+			var Card;
 
 			while(dealt < 7){
 
@@ -91,14 +92,21 @@
 
 					var user_id = Game.order[i];
 					var Player = Game.players[user_id];
+
 					Player.cards = Player.cards || [];
-					Player.cards.push(Game.stack.shift());
+					Card = Game.stack.shift();
+
+					comms.sendCard(Player.id, Card); // TODO
+
+					Player.cards.push(Card);
 				}
 
 				dealt++;
 			}
 
-			Game.layoff.push(Game.stack.shift());
+			Card = Game.stack.shift();
+			Game.layoff.push(Card);
+			comms.sendCard(Game.Host.id, Card); // TODO
 		}
 
 		return {
@@ -197,9 +205,13 @@
 					throw new Error('Not player\'s turn.')
 				}
 
-				Game.players[user_id].cards.push(Game.stack.shift());
+				var Card = Game.stack.shift();
+
+				Game.players[user_id].cards.push(Card);
 				Game.order.shift();
 				Game.order.push(user_id);
+
+				comms.sendCard(user_id, Card); // TODO
 			}
 		};
 	});
