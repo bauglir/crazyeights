@@ -12,8 +12,10 @@
 
 		var hand = this;
 
-		// TODO: get the userlist from the game_logic.
+		// TODO: get the hands user_id.
+		hand.player_id = 1;
 
+		// TODO: get the userlist from the game_logic.
 		hand.players = [
 			{username: 'Danko'},
 			{username: 'Inigo'},
@@ -52,7 +54,7 @@
 		hand._playCard = function(Card){
 
 			// TODO: send user_id.
-			game_logic.playCard(1, Card);
+			game_logic.playCard(hand.player_id, Card);
 		};
 	}
 })();
