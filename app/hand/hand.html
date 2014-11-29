@@ -1,11 +1,14 @@
-<ul class="users">
-	<li ng-repeat="player in hand.players">
-		{{player.username}}
-	</li>
-</ul>
+<div class="col-xs-12">
+	<ul class="users">
+		<li class="player_heading">Spelers:</li>
+		<li ng-repeat="player in hand.players">
+			{{player.username}}
+		</li>
+	</ul>
 
-<ul class="cards">
-	<li ng-repeat="card in hand.cards">
-		<img ng-click="hand.playCard(card)" src="{{hand.getSvg(card)}}" title="{{card.suit}}  {{card.rank}}" />
-	</li>
-</ul>
+	<ul class="cards">
+			<li ng-repeat="card in hand.cards">
+				<div ng-click="hand._playCard(card)" style="background: url('{{hand.getSvg(card)}}') center center; width: 225px; height: 314px;" title="{{card.suit}}  {{card.rank}}"></div>
+			</li>
+	</ul>
+</div>

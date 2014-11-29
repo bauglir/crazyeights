@@ -1,4 +1,26 @@
-<div class="container">
+<div class="col-md-6 col-md-offset-3">
+  <div class="login-modal">
+    <div class="row">
+      <div class="col-md-4"><div class="graphic"></div></div>
+      <div class="col-md-8">
+        <h1>Begin een nieuw spel</h1>
+        <p>Om een nieuw spel pesten te beginnen voert u uw gebruikersnaam in en kiest u ervoor deel te nemen aan een spel of een nieuw spel te starten.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6"><input ng-model="user.name" type="text" placeholder="Username or hostname" /></div>
+      <div class="col-md-6"><select ng-model="user.role_choice"><option value="user">Join a game</option><option value="host">Start a game</option></select> </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6"><input ng-model="user.hostid" type="text" placeholder="Game01" ng-if="user.role_choice == 'user'" /></div>
+      <div class="col-md-6">
+        <input class="formsubmit" type="submit" value="play" ng-click="user.play()">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--div class="container" style="clear: both;">
     <form name="loginForm" novalidate class="form-signin" role="form">
     <h2 class="form-signin-heading">Host a game</h2>
     <p>    
@@ -18,4 +40,4 @@
     </p>
      
     </form>
-</div>
+</div-->
