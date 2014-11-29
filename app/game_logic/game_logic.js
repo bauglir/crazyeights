@@ -96,7 +96,7 @@
 					Player.cards = Player.cards || [];
 					Card = Game.stack.shift();
 
-					comms.sendCard(Player.id, Card); // TODO
+					comms.send(Player.id, Card);
 
 					Player.cards.push(Card);
 				}
@@ -106,7 +106,7 @@
 
 			Card = Game.stack.shift();
 			Game.layoff.push(Card);
-			comms.sendCard(Game.Host.id, Card); // TODO
+			comms.send(Game.Host.id, Card);
 		}
 
 		return {
@@ -211,7 +211,7 @@
 				Game.order.shift();
 				Game.order.push(user_id);
 
-				comms.sendCard(user_id, Card); // TODO
+				comms.send(user_id, Card);
 			}
 		};
 	}]);
