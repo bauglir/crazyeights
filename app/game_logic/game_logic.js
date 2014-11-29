@@ -183,7 +183,7 @@
 				console.debug('Player.cards', Player.cards);
 				console.debug('Game.order', Game.order);
 
-				Game.Host.cards.unshift(Player.cards.splice(i, 1));
+				Game.Host.cards.unshift(Player.cards.splice(i, 1)[0]);
 				Game.order.shift();
 				Game.order.push(user_id);
 
