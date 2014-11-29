@@ -148,6 +148,10 @@
 
 			playCard: function playCard(user_id, card){
 
+				// TODO: game logic playcard.
+				console.info('player ' + user_id + ' is going to play this card: '
+					+ card.suit + card.rank);
+
 				if(Game.order.reset() != user_id){
 
 					throw new Error('Not player\'s turn.')
