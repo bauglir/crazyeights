@@ -25,6 +25,9 @@
 
           connection.on('open', function connectionOpened() {
               connection.on('data', function receiveData(data) {
+                  if(data.action === 'play_card') {
+                      game_logic.playCard(data.user_id, data.card);
+                  }
                   comms.received_messages.push(data);
                   $rootScope.$apply();
               });
