@@ -10,7 +10,7 @@
 	angular.module('app')
 		.service('game_logic',[ 'game_configs', function(game_configs){
 
-    var comms;
+    	var comms;
 
 		var Game = {
 			config: game_configs.Pesten,
@@ -21,7 +21,7 @@
 			order: []
 		};
 
-    var has_started = false;
+    	var has_started = false;
 
 		function shuffle(o){
 			for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -33,7 +33,7 @@
 			var dealt = 0;
 			var Card;
 
-			while(dealt <= Game.config.deal_count){
+			while(dealt < Game.config.deal_count){
 
 				for(var i = 0; i < Game.order.length; i++){
 
@@ -43,9 +43,9 @@
 					Player.cards = Player.cards || [];
 					Card = Game.stack.shift();
 
-					comms.send(Player.id, {action: 'cards', cards: Player.cards});
-
 					Player.cards.push(Card);
+
+					comms.send(Player.id, {action: 'cards', cards: Player.cards});
 				}
 
 				dealt++;
@@ -62,7 +62,7 @@
 
 				console.debug('creating game', player_count);
 
-        comms = comms_instance;
+        		comms = comms_instance;
 
 				Game.player_count = player_count;
 				Game.players = {};
@@ -83,6 +83,11 @@
 
 				console.debug('adding player', User);
 
+				if(has_started){
+
+					throw new Error("Game has already started")
+				}
+
 				if(Game.player_count <= Game.order.length){
 
 					throw new Error('No more room for new player');
@@ -102,29 +107,39 @@
 				return [Game.order.length, Game.player_count];
 			},
 
-      getGameState: function() {
-        console.log(Game);
-      },
+			getGameState: function() {
+				console.log(Game);
+			},
 
-      hasStarted: function hasStarted() {
-        return has_started;
-      },
+			hasStarted: function hasStarted() {
+
+				return has_started;
+			},
 
 			startGame: function startGame(){
 
 				console.debug('Starting game');
 
-        has_started = true;
+				has_started = true;
 
-				Game.stack = shuffle(game_configs.cards);
-				console.debug(Game.stack, game_configs.cards);
+				// Using slice to create a clone.
+				Game.stack = shuffle(game_configs.cards.slice(0));
+				console.debug(Game.stack);
+				console.debug(game_configs.cards);
 				deal();
 
 				var next_user_id = Game.order[0];
 				var Player = Game.players[next_user_id];
 
 				console.debug('next_user_id', next_user_id);
-				comms.send(next_user_id, {action: 'turn', cards: Player.cards});
+				comms.send(
+					next_user_id,
+					{
+						action: 'turn',
+						cards: Player.cards,
+						top: Game.Host.cards[0]
+					}
+				);
 			},
 
 			playCard: function playCard(user_id, card){
@@ -179,7 +194,7 @@
 				var next_user_id = Game.order[0];
 
 				console.debug('next_user_id', next_user_id);
-				comms.send(next_user_id, {action: 'turn', cards: Player.cards});
+				comms.send(next_user_id, {action: 'turn', cards: Player.cards, top: Game.Host.cards[0]});
 			},
 
 			isCardAllowed: function isCardAllowed(Card){
@@ -210,6 +225,12 @@
 				console.debug('Game.order', Game.order);
 
 				comms.send(user_id, {action: 'cards', cards: Game.players[user_id].cards});
+
+				var next_user_id = Game.order[0];
+
+				console.debug('next_user_id', next_user_id);
+				var Player = Game.players[next_user_id];
+				comms.send(next_user_id, {action: 'turn', cards: Player.cards, top: Game.Host.cards[0]});
 			}
 		};
 	}]);
