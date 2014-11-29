@@ -84,7 +84,7 @@
 
 				console.debug('adding player', User);
 
-				if(Game.player_count >= Game.order.length){
+				if(Game.player_count <= Game.order.length){
 
 					throw new Error('No more room for new player');
 				}
