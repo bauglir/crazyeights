@@ -18,7 +18,7 @@
 
 		table.players = [
 			{username: 'Danko'},
-			{username: 'Indigo'},
+			{username: 'Inigo'},
 			{username: 'Wema'},
 			{username: 'Rob'},
 			{username: 'Joris'},
