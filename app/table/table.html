@@ -8,7 +8,7 @@
 
 	<ul class="cards">
 		<li ng-repeat="card in table.cards">
-			<div style="background: url('{{table.getSvg(card)}}') center center; width: 225px; height: 314px;" title="{{card.suit}}  {{card.rank}}"></div>
+			<div ng-click="hand._playCard(card)" style="background: url('{{table.getSvg(card)}}') center center; width: 225px; height: 314px;" title="{{card.suit}}  {{card.rank}}"></div>
 		</li>
 	</ul>
 </div>

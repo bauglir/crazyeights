@@ -21,6 +21,7 @@ body, html {
 
 .cards {
 	position: relative;
+	margin: 0 0 0 33px;
 }
 
 .cards li {
@@ -32,37 +33,37 @@ body, html {
 }
 
 .cards li:nth-child(1){
-	left: 0;
+	left: 0px;
 	transform: rotate(-15deg);
 }
 
 .cards li:nth-child(2){
-	left: 50px;
+	left: 100px;
 	transform: rotate(-5deg);
 }
 
 .cards li:nth-child(3){
-	left: 100px;
+	left: 200px;
 	transform: rotate(5deg);
 }
 
 .cards li:nth-child(4){
-	left: 150px;
+	left: 300px;
 	transform: rotate(15deg);
 }
 
 .cards li:nth-child(5){
-	left: 200px;
+	left: 400px;
 	transform: rotate(25deg);
 }
 
 .cards li:nth-child(6){
-	left: 250px;
+	left: 500px;
 	transform: rotate(35deg);
 }
 
 .cards li:nth-child(7){
-	left: 300px;
+	left: 600px;
 	transform: rotate(45deg);
 }
 
