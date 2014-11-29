@@ -16,6 +16,7 @@
         home.hostGame = function hostGame() {
             home.is_hosting = true;
             game_logic.createGame(comms, 4);
+            game_logic.setHost({ id: comms.id });
         };
 
         home.game = game_logic;

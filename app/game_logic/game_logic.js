@@ -54,7 +54,6 @@
 			Card = Game.stack.shift();
 			Game.Host.cards = Game.Host.cards || [];
 			Game.Host.cards.unshift(Card);
-			comms.send(Game.Host.id, {action: 'layoff', card: Card});
 		}
 
 		return {
@@ -173,7 +172,6 @@
 
 				console.debug('next_user_id', next_user_id);
 				comms.send(next_user_id, {action: 'turn', cards: Player.cards});
-				comms.send(Game.Host.id, {action: 'layoff', card: card});
 			},
 
 			isCardAllowed: function isCardAllowed(Card){
