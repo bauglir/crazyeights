@@ -1,7 +1,7 @@
 (function() {
     'use strict'
 
-    angular.module('app').service('comms', ['$rootScope', function Comms($rootScope) {
+    angular.module('app').service('comms', ['$rootScope', 'game_logic', function Comms($rootScope, game_logic) {
         var comms = {
             id: '<not set>',
             peers: {},
@@ -19,6 +19,7 @@
         // peer, where the current peer acts as the master.
         peer.on('connection', function connectionEstablished(connection) {
           comms.peers[connection.peer] = connection;
+          game_logic.addPlayer({ id: connection.peer });
 
           connection.on('open', function connectionOpened() {
               connection.on('data', function receiveData(data) {
@@ -34,6 +35,11 @@
             angular.forEach(comms.peers, function(client) {
                 client.send(message);
             });
+        };
+
+        comms.hasPeers = function hasPeers(amount) {
+            amount = amount || -1;
+            return (Object.getOwnPropertyNames(comms.peers).length >= amount);
         };
 
         // Sets another peer as the master of the current peer

@@ -1,6 +1,41 @@
 <div ng-controller="Home as homeController">
 	<h1>{{home.name}}</h1>
+
   <user ng-hide="user.name"></user>
+
+  <div ng-show="user.name && !home.comms.hasPeers(1) && !home.is_hosting">
+    <h2>Hi {{ user.name }}</h2>
+
+    <form no-validate ng-submit="home.comms.join(game_id)">
+        <input ng-model="game_id" placeholder="Game ID">
+        <input type="submit" value="Join">
+    </form>
+
+    <form no-validate ng-submit="home.hostGame(user)">
+        <input type="submit" value="Host a game">
+    </form>
+  </div>
+
+  <div ng-show="home.is_hosting">
+      <div ng-hide="home.game.hasStarted()">
+          {{ home.comms.id }}
+          <qrcode data="{{$location + '?host=' + home.comms.id}}" size="50"></qrcode>
+
+          <form no-validate ng-submit="home.game.startGame()">
+              <input type="submit" value="Start Game" ng-disabled="!home.comms.hasPeers(2) || home.game.hasStarted()">
+          </form>
+      </div>
+
+      <div ng-show="home.game.hasStarted()">
+          <h3>Current layed off cards</h3>
+          {{ user.cards | json }}
+      </div>
+  </div>
+
+  <div ng-show="home.comms.hasPeers(1) && !home.is_hosting">
+    Waiting for game to start...
+  </div>
+
 	<hr>
 	<h2>Debug</h2>
 
@@ -46,4 +81,8 @@
 			<input type="button" value="Join" ng-click="home.comms.join(host.id)">
 		</form>
 	</div>
+
+  <div class="Debug">
+    {{ home.game.getGameState() }}
+  </div>
 </div>

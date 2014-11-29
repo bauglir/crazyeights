@@ -10,8 +10,18 @@
 
     function Home(comms, game_logic){
         var home = this;
-        home.name = "Hah Gaaaaame";
+
         home.comms = comms;
-		home.game = game_logic;
+
+        home.hostGame = function hostGame(user) {
+            user.id = comms.id;
+            home.is_hosting = true;
+            game_logic.createGame(comms, 4);
+            game_logic.setHost(user);
+        };
+
+        home.game = game_logic;
+        home.isHosting = false;
+        home.name = "Hah Gaaaaame";
     }
 })();
