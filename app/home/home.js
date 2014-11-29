@@ -6,9 +6,9 @@
 
     angular.module('app').controller('Home', Home);
 
-    Home.$inject = ['comms', 'game_logic'];
+    Home.$inject = ['comms', 'game_logic', '$location'];
 
-    function Home(comms, game_logic){
+    function Home(comms, game_logic, $location) {
         var home = this;
 
         home.comms = comms;
@@ -23,5 +23,9 @@
         home.game = game_logic;
         home.isHosting = false;
         home.name = "Hah Gaaaaame";
+
+        // Only display debug information if requested through a GET parameter
+        var searchObject = $location.search();
+        home.showDebug = searchObject.debug || false;
     }
 })();
