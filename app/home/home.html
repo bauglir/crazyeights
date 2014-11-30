@@ -21,8 +21,7 @@
       </div>
 
       <div ng-show="home.game.hasStarted()">
-          <h3>Current layed off cards</h3>
-          {{ user.cards | json }}
+          <table cards="user.cards" players="[]"></table>
       </div>
   </div>
 
