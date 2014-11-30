@@ -42,6 +42,10 @@
 			return 'svg%20playing%20cards/' + $path + '/' + $file;
 		};
 
+    hand.pass = function pass() {
+      comms.send(Object.getOwnPropertyNames(comms.peers)[0], { action: 'pass', user_id: comms.id });
+    };
+
 		hand._playCard = function(Card){
       comms.send(Object.getOwnPropertyNames(comms.peers)[0], { action: 'play_card', user_id: comms.id, card: Card })
 		};

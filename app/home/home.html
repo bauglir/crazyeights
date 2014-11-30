@@ -26,6 +26,8 @@
           </li>
         </ul>
 
+        <button class="btn btn-danger" ng-click="handController.pass()">Pass</button>
+
         <ul class="cards">
             <li ng-repeat="card in handController.cards">
               <div ng-click="handController._playCard(card)" style="background: url('{{handController.getSvg(card)}}') center center; width: 225px; height: 314px;" title="{{card.suit}}  {{card.rank}}"></div>
