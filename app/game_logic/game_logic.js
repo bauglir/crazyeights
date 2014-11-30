@@ -10,7 +10,7 @@
 	angular.module('app')
 		.service('game_logic',[ 'game_configs', function(game_configs){
 
-    	var comms;
+    var comms;
 
 		var Game = {
 			config: game_configs.Pesten,
@@ -21,7 +21,22 @@
 			order: []
 		};
 
-    	var has_started = false;
+    var has_started = false;
+
+    function passTurnToPlayerAfter(user_id) {
+				Game.order.shift();
+				Game.order.push(user_id);
+
+				console.debug('Game.Host.cards', Game.Host.cards);
+				console.debug('Player.cards', Game.players[user_id].cards);
+				console.debug('Game.order', Game.order);
+
+				comms.send(user_id, { action: 'cards', cards: Game.players[user_id].cards });
+
+				var next_user_id = Game.order[0];
+				console.debug('next_user_id', next_user_id);
+				comms.send(next_user_id, {action: 'turn', cards: Game.players[next_user_id].cards, top: Game.Host.cards[0]});
+    }
 
 		function shuffle(o){
 			for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -143,13 +158,10 @@
 			},
 
 			playCard: function playCard(user_id, card){
-
-				// TODO: game logic playcard.
 				console.info('player ' + user_id + ' is going to play this card: '
 					+ card.suit + card.rank);
 
 				if(Game.order[0] != user_id){
-
 					throw new Error('Not player\'s turn.');
 				}
 
@@ -157,7 +169,6 @@
 				var owns_card = false;
 
 				for(var i = 0; i < Player.cards.length; i++){
-
 					var own_card = Player.cards[i];
 					if(own_card.id == card.id){
 
@@ -168,14 +179,12 @@
 				}
 
 				if(!owns_card){
-
 					throw new Error('Player does not own this card.');
 				}
 
 				var topCard = Game.Host.cards[0];
 
 				if(!Game.config.isCardAllowed(topCard, card)){
-
 					throw new Error('Card is not allowed.')
 				}
 
@@ -184,18 +193,8 @@
 				console.debug('Game.order', Game.order);
 
 				Game.Host.cards.unshift(Player.cards.splice(i, 1)[0]);
-				Game.order.shift();
-				Game.order.push(user_id);
 
-				console.debug('Game.Host.cards', Game.Host.cards);
-				console.debug('Player.cards', Player.cards);
-				console.debug('Game.order', Game.order);
-
-				var next_user_id = Game.order[0];
-
-				console.debug('next_user_id', next_user_id);
-        comms.send(user_id, { action: 'cards', cards: Player.cards });
-				comms.send(next_user_id, {action: 'turn', cards: Game.players[next_user_id].cards, top: Game.Host.cards[0]});
+        passTurnToPlayerAfter(user_id);
 			},
 
 			isCardAllowed: function isCardAllowed(Card){
@@ -205,11 +204,9 @@
 			},
 
 			grabCard: function grabCard(user_id){
-
 				console.debug(user_id, 'grabs card');
 
 				if(Game.order[0] != user_id){
-
 					throw new Error('Not player\'s turn.')
 				}
 
@@ -219,19 +216,7 @@
 				console.debug('Game.order', Game.order);
 				Game.players[user_id].cards.push(Card);
 
-				Game.order.shift();
-				Game.order.push(user_id);
-
-				console.debug('Player.cards', Game.players[user_id].cards);
-				console.debug('Game.order', Game.order);
-
-				comms.send(user_id, {action: 'cards', cards: Game.players[user_id].cards});
-
-				var next_user_id = Game.order[0];
-
-				console.debug('next_user_id', next_user_id);
-				var Player = Game.players[next_user_id];
-				comms.send(next_user_id, {action: 'turn', cards: Player.cards, top: Game.Host.cards[0]});
+        passTurnToPlayerAfter(user_id);
 			}
 		};
 	}]);
