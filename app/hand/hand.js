@@ -12,6 +12,10 @@
 
 		var hand = this;
 
+    function sendToHost(message) {
+      comms.send(Object.getOwnPropertyNames(comms.peers)[0], message);
+    }
+
 		// TODO: get the userlist from the game_logic.
 		hand.players = [
 			{username: 'Danko', active: true},
@@ -25,7 +29,6 @@
 		hand.cards = [];
 
 		hand.setPlayers = function(players){
-
 			hand.players = players;
 		};
 
@@ -43,11 +46,11 @@
 		};
 
     hand.pass = function pass() {
-      comms.send(Object.getOwnPropertyNames(comms.peers)[0], { action: 'pass', user_id: comms.id });
+      sendToHost({ action: 'pass', user_id: comms.id });
     };
 
 		hand._playCard = function(Card){
-      comms.send(Object.getOwnPropertyNames(comms.peers)[0], { action: 'play_card', user_id: comms.id, card: Card })
+      sendToHost({ action: 'play_card', user_id: comms.id, card: Card });
 		};
 	}
 })();
