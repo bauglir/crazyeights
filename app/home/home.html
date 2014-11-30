@@ -1,6 +1,4 @@
 <div ng-controller="Home as homeController">
-	<h1>{{home.name}}</h1>
-
   <user ng-hide="home.comms.hasPeers(1) || home.is_hosting"></user>
 
   <div ng-show="home.is_hosting">

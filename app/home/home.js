@@ -23,7 +23,6 @@
         home.game = game_logic;
         home.game_uri = $location.absUrl();
         home.isHosting = false;
-        home.name = "Hah Gaaaaame";
 
         // Only display debug information if requested through a GET parameter
         var searchObject = $location.search();
