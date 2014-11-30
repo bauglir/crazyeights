@@ -3,11 +3,20 @@
 
   <div ng-show="home.is_hosting">
       <div ng-hide="home.game.hasStarted()">
-          {{ home.comms.id }}
+          <p>
+              To join the game, either scan the following QR code.
+          </p>
           <qrcode data="{{ home.game_uri + '?host=' + home.comms.id }}" size="100"></qrcode>
+          <p>
+              Send the link <a href="{{ home.game_uri + '?host=' + home.comms.id }}">{{ home.game_uri + '?host=' + home.comms.id }}</a> to prospective players.
+          </p>
+          <p>
+              Or manually enter the ID <em>{{ home.comms.id }}</em> in the 'Join Game' screen.
+          </p>
 
+          <p>As soon as at least two players join the game it can be started.</p>
           <form no-validate ng-submit="home.game.startGame()">
-              <input type="submit" value="Start Game" ng-disabled="!home.comms.hasPeers(2) || home.game.hasStarted()">
+            <button type="submit" class="btn btn-success btn-lg" ng-disabled="!home.comms.hasPeers(2) || home.game.hasStarted()">Start Game</button>
           </form>
       </div>
 
