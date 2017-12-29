@@ -17,6 +17,10 @@
             $rootScope.$apply();
         });
 
+        peer.on('error', function(error) {
+          console.error(error);
+        });
+
         // This section establishes a master->client relation with the current
         // peer, where the current peer acts as the master.
         peer.on('connection', function connectionEstablished(connection) {
