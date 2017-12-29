@@ -10,7 +10,7 @@
 
         var setCards;
 
-        var peer = new Peer({ key: 'z4zuz8j1qtkmlsor' });
+        var peer = new Peer({ key: 'z4zuz8j1qtkmlsor', secure: true });
 
         peer.on('open', function(id) {
             comms.id = id;
