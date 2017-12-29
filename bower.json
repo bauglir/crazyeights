@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "homepage": "https://github.com/bauglir/crazyeights",
   "authors": [
+    "cmddavid",
+    "Danko Adamczyk",
+    "Inigo Grimbergen",
+    "Joris Kraak <me@joriskraak.nl>",
+    "Rob van den Hout",
     "Wema <w.wuyts@ibis.nl>"
   ],
   "license": "MIT",
